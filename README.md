@@ -31,3 +31,5 @@ To save and keep a persistent record of customers, accounts, and transactions, t
 #### Deleting Customers and Accounts
 When deleting a customer record from the system, the user enters the identification number associated with the customer object, which is used to find and delete the customer from the CustomerList object. After deleting the customer record, the customer ID number is used to search for and delete all of the accounts linked with the customer. And finally, completing the customer deletion process is the removal of all of the transactions associated with all of the recently deleted accounts. If the user just wants to delete an account, the deletion process would repeat but only affect the chosen account and its transactions.
 
+##### Additional Documentation
+To see and read a more in-depth analysis of how the system and its menu actions work, here is a link to the [Banking Project Write-Up](https://github.com/BrianDeanO/Banking-System/files/8174628/Banking_System_Project_BDean.pdf).
