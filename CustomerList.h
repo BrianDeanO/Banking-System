@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "linkedList.h";
-#include "customer.h";
+#include "linkedList.h"
+#include "customer.h"
 using namespace std;
 
 //customerList class that inherits directly from the LinkedList class 

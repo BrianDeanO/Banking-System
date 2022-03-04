@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cstring>
 #include "account.h"
 using namespace std;
 int const SIZE = 50;

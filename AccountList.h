@@ -5,8 +5,8 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
-#include "linkedList.h";
-#include "account.h";
+#include "linkedList.h"
+#include "account.h"
 #include "savings.h"
 #include "checking.h"
 #include "certificateofdeposit.h"
