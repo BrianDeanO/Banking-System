@@ -2,6 +2,7 @@
 
 #### Synopsis
 This banking system uses binary files to store, track, and update persistent linked lists of customer records, the accounts they create, and their transaction history.
+##
 
 #### Main Menu
 With the single creation of a bank object in the project’s main class, a menu appears and displays ten options for the user to select. Those options are: 
