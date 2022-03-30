@@ -74,6 +74,7 @@ public:
     {
         node<T>* temp = head;
         
+        //while loop that walks through our list and deletes each node
         while (temp != 0)
         {
             node<T>* nextTemp = temp->getNext();
@@ -95,14 +96,15 @@ public:
         node<T>* nTemp = new node<T>();
         nTemp->setData(data);
 
+        //default action that sets the new node as the head and tail if the list is empty
         if (head == 0)
         {
-
             head = nTemp;
             tail = nTemp;
             count++;
         }
 
+        //else statement that adds the node to the beginning of the list, if it is not empty
         else
         {
             nTemp->setNext(head);
@@ -115,11 +117,13 @@ public:
     //function that allows us to remove nodes from the front of our linked list
     void removeFront()
     {
+        //if statement that returns nothing if the list is empty
         if (head == 0)
         {
             return;
         }
 
+        //else statement that handles the removal of the head of our list, if it has one that is not null
         else
         {    
             node<T>* nTemp = head;
@@ -142,6 +146,7 @@ public:
         node<T>* nTemp = new node<T>();
         nTemp->setData(data);
 
+        //default action that sets the new node as the head and tail if the list is empty
         if (head == 0)
         {
             head = nTemp;
@@ -149,6 +154,7 @@ public:
             count++;
         }
 
+        //else statment that will add a node to the end of our non-empty list
         else
         {
             nTemp->setPrev(tail);
@@ -161,11 +167,13 @@ public:
     //function that removes a node from the end of our list
     void removeRear()
     {
+        //if statement that returns nothing if the list is empty
         if (head == 0)
         {
             return;
         }
 
+        //else statement that removes the tail of our list
         else
         {
             node<T>* temp = tail;
@@ -184,6 +192,7 @@ public:
     //function that allows us to insert a node a specific location within our linked list
     void insertAt(T data, int index)
     {
+        //statement that simply inserts the node as the head of our list, if it is empty
         if (head == 0)
         {
             head = new node<T>();
@@ -191,29 +200,36 @@ public:
             count++;
         }
 
+        //else statement that handles each specific node insertion scenario
         else
         {
+            //statement that will call the addFront function if the index is zero
             if (index < 1)
             {
                 addFront(data);
             }
 
+            //statement that adds the node to the end of the list if the index is beyond or equal to the current size of the list
             else if (index >= count)
             {
                 addRear(data);
             }
 
+            //else statement that handles the insertion of the node when it is between two other nodes
             else
             {
+                //creating our temp and new node node objects
                 node<T>* temp = head;
                 node<T>* nNode = new node<T>();
                 nNode->setData(data);
 
+                //loop that uses our temp node to walk through the list to the desired location
                 for (int i = 0; i < index - 1; i++)
                 {
                     temp = temp->getNext();
                 }
 
+                //properly inserting the new node into the list 
                 nNode->setNext(temp->getNext());
                 nNode->setPrev(temp);
                 temp->setNext(nNode);
@@ -226,35 +242,40 @@ public:
     //function that removes a node from a user defined location in the list
     void removeAt(int index)
     {
-        //this subtracts one from the user input in order to change the user input into the correct spot in the list
-        //;index--;
-
+        //statement that does nothing if the list is empty
         if (head == 0)
         {
             return;
         }
 
+        //else block that handles the removal of the node at the specified index 
         else
         {
+            //if the index is zero, this statement removes the head node
             if (index < 1)
             {
                 removeFront();
             }
 
+            //statement that removes the tail node if the index is equal or greater than the list size
             else if ((index+1) >= count)
             {
                 removeRear();
             }
 
+            //else statement that handles the deletion of a node that is within the list
             else
             {
+                //creating our temporary node pointer
                 node<T>* temp = head;
 
+                //for loop that allows to walk to the specified index in the list
                 for (int i = 0; i < index; i++)
                 {
                     temp = temp->getNext();
                 }
 
+                //removing the node and repairing the links in the list
                 node<T>* nTemp = temp->getNext();
                 nTemp->setPrev(temp->getPrev());
                 temp->getPrev()->setNext(nTemp);
@@ -269,10 +290,12 @@ public:
     {
         if (head == 0)
         {
-            //we solved this issue by just returnin itself
+            //we solved this issue by just return itself
             return T();
         }
+
         node<T>* temp = head;
+
         for (int i = 0; i < index; i++)
         {
             temp = temp->getNext();
@@ -281,18 +304,21 @@ public:
         return temp->getData();
     }
 
-    //operator overload, not needed
+    //function that will return a reference of the node from our list
     T& getRefAt(int index)
     {
         if (head == 0)
         {
             return T();
         }
+
         node<T>* temp = head;
+
         for (int i = 0; i < index; i++)
         {
             temp = temp->getNext();
         }
+
         return temp->getData();
     }
 
@@ -304,11 +330,14 @@ public:
            // return T();
             return;
         }
+
         node<T>* temp = head;
+
         for (int i = 0; i < index; i++)
         {
             temp = temp->getNext();
         }
+        
         temp->setData(val);
     }
 

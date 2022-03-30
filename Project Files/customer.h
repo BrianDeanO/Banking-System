@@ -64,7 +64,7 @@ int customer::getid()
 //the two following set name functions are for the two different overloaded constructor parameters
 void customer::setfname(char* fname)
 {
-	if (strlen(fname) < 100)
+	if (strlen(fname) > 100)
 		return;
 	strcpy_s(firstName, fname);
 }
@@ -85,7 +85,7 @@ char* customer::getfname()
 //the two following set name functions are for the two different overloaded constructor parameters
 void customer::setlname(char* lname)
 {
-	if (strlen(lname) < 100)
+	if (strlen(lname) > 100)
 		return;
 	strcpy_s(lastName, lname);
 }
