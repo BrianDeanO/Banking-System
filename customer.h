@@ -105,8 +105,6 @@ char* customer::getlname()
 //basic print function that displays the full name and ID
 void customer::print()
 {
-	//cout << "  " << firstName << " " << lastName << right << setw(17) << ID << endl;
-
 	cout << "Name: " << firstName << " " << lastName << endl;
 	cout << "Customer ID: " << ID << endl;
 	cout << endl;
