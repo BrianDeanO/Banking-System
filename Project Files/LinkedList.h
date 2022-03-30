@@ -288,64 +288,76 @@ public:
     //function that returns the data from a specific location in our list
     T getAt(int index)
     {
+        //returning a default form of the object if the list is empty
         if (head == 0)
         {
-            //we solved this issue by just return itself
             return T();
         }
 
+        //creating our temporary node
         node<T>* temp = head;
 
+        //traversing through the list
         for (int i = 0; i < index; i++)
         {
             temp = temp->getNext();
         }
 
+        //returning the desired element
         return temp->getData();
     }
 
     //function that will return a reference of the node from our list
     T& getRefAt(int index)
     {
+        //returning a default form of the object if the list is empty
         if (head == 0)
         {
             return T();
         }
-
+        
+        //creating the temporary node
         node<T>* temp = head;
 
+        //traversing through our linked list
         for (int i = 0; i < index; i++)
         {
             temp = temp->getNext();
         }
 
+        //returning the data of the node
         return temp->getData();
     }
 
-    //additional function we put in to our transaction list library for our own pritoty queue
+    //additional function we put into our transaction list library for our own priority queue
     void setDataAt(int index, T val)
     {
+        //returning nothing if the list is empty
         if (head == 0)
         {
-           // return T();
             return;
         }
 
+        //creating the temporary node
         node<T>* temp = head;
 
+        //traversing to the location marked by the index passed to the function
         for (int i = 0; i < index; i++)
         {
             temp = temp->getNext();
         }
         
+        //setting the node's data
         temp->setData(val);
     }
 
     //function that prints the data found in each node of our list
     void print()
     {
+        //creating our temporary node
         node<T>* temp = head;
 
+        //while loop that allows us to traverse through the list and print each node's data
         while (temp != 0)
         {
             temp->getData().print();
