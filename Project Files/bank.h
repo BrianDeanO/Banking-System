@@ -6,7 +6,7 @@
 #include "AccountList.h"
 using namespace std;
 
-
+//creating our class that will handle every operation within the banking system
 class bank
 {
 private:
@@ -196,6 +196,7 @@ public:
 	//function that handles when the user wants to make a deposit to their account
 	void menuDeposit()
 	{
+		//creating the temporary variables to get user input and process the deposit correctly
 		transaction temp;
 		account* aTemp = nullptr;
 		account* aTemp2 = nullptr;
@@ -212,21 +213,26 @@ public:
 			transactions.readFile("transactions.dat");
 		}
 
+		//getting the user's account ID
 		cout << "What is the Account ID? ";
 		cin >> accNum;
 		
 		//using the getAccountData function to set the temporary pointer data to the account based on the user inputted ID
 		aTemp = accounts.getAccountData(accNum);
 
+		//if statement that will run if the account ID is not found on file
 		if (aTemp == nullptr)
 		{
 			cout << "That Account ID is not in our system.\n";
 		}
 
+		//else statment that handles the transaction process
 		else
 		{
 			//using the makeTransaction function to process the deposit and return a transaction object reflecting the action
 			temp.makeTransaction(aTemp, 1);
+
+			//adding the newly created transaction object to our queue of transactions
 			transactions.push(temp);
 		}
 
@@ -248,6 +254,7 @@ public:
 
 		//sorting our accounts list with the updated account in the list
 		accounts.sort();
+
 		//writing the now sorted account list to file
 		accounts.writeFile();
 	}
@@ -255,6 +262,7 @@ public:
 	//function that processes the withdrawal action 
 	void menuWithdrawal()
 	{
+		//creating the temporary variables to get user input and process the withdrawal correctly
 		transaction temp;
 		transaction wTemp;
 		account* aTemp = nullptr;
@@ -284,14 +292,16 @@ public:
 			cout << "That Account ID is not in our system.\n";
 		}
 
+		//statement that handles the withdrawal process when the account is found in the system
 		else
 		{
+			//creating the withdrawal transaction object 
 			temp.makeTransaction(aTemp, 2);
 
 			//putting the newly created transaction object onto our priority queue of transactions
 			transactions.push(temp);
 
-			//if statement that creates a transaction object if the account drew a withdrawal penalty
+			//if statement that creates another seperate transaction object if the account drew a withdrawal penalty
 			if (aTemp->getWithdrawalPenalty() > 0)
 			{
 				wTemp.withdrawalPenaltyTransaction(aTemp, 3);
@@ -299,6 +309,7 @@ public:
 			}
 		}
 
+		//writing the updated transaction queue to file
 		transactions.writeFile("transactions.dat");
 
 		//setting a temporary account to the beginning of our linked list of accounts
@@ -315,7 +326,8 @@ public:
 		accounts.setDataAt(count, aTemp);
 
 		//sorting our accounts list with the updated account in the list
-		accounts.sort();
+		accounts.sort(); 
+
 		//writing the now sorted account list to file
 		accounts.writeFile();
 	}
@@ -323,12 +335,13 @@ public:
 	//function that prints our complete list of customers
 	void printCustomers()
 	{
+		//reading the customers file if the customer list is empty
 		if (customers.getCount() == 0)
 		{
 			customers.readFile("customers.dat");
 		}
 
-		//if else statement that prints the correct output depending on if the customer list is populated
+		//if else statement that prints the correct output depending on if the customer list was just populated
 		if (customers.getCount() == 0)
 		{
 			cout << "There are no current customers on file.\n";
@@ -354,7 +367,7 @@ public:
 			accounts.readFile();
 		}
 
-		//if else statement that prints the correct output depending on if the accounts list is populated
+		//if else statement that prints the correct output depending on if the accounts list was just populated
 		if (accounts.getCount() == 0)
 		{
 			cout << "There are no current accounts on file.\n";
@@ -372,6 +385,7 @@ public:
 	//function that prints the queue of transactions in order from earliest to latest depending on their timestamp
 	void printTransactions()
 	{
+		//reading the transactions file if the transaction queue is empty
 		if (transactions.size() == 0)
 		{
 			transactions.readFile("transactions.dat");
@@ -446,8 +460,7 @@ public:
 
 			cout << "Customer Info, Accounts, and Transactions tied with Customer " << userInput << " have been deleted." << endl;
 		}
-		
-		
+			
 	}
 
 	//function that allows us to delete an account based on an user inputted ID
@@ -485,13 +498,12 @@ public:
 			cout << "Account " << userInput << " has been deleted." << endl;
 		}
 
-		
 	}
 
 	//goodbye function that ends the program when the user is finished
 	int goodbye()
 	{
-		cout << "Thanks for doing business with SameDiff bank.\n";
+		cout << "Thanks for doing business with the Fidelity Fiduciary Bank.\n";
 		return 0;
 	}
 };

@@ -3,6 +3,7 @@
 #include <ctime>
 #include <iomanip>
 
+//creating the class to handle and create transactions based on withdrawals and deposits in the system
 class transaction
 {
 public:
@@ -97,16 +98,20 @@ public:
 			cout << "How much would you like to deposit? $";
 			cin >> amount;
 
+			//while loop that verifies that the amount is not negative
 			while (amount < 0)
 			{
 				cout << "Incorrect Amount. Try Again. How much would you like to withdrawal? $";
 				cin >> amount;
 			}
 
+			//depositing the money from the account
 			acc->deposit(amount);
 
+			//displaying the new balance
 			cout << "Updated Balance Amount: $" << acc->getBalance() << endl;
 
+			//setting the deposit amount and timestamp of the transaction object
 			setAmount(amount);
 			setTimestamp();
 		}
@@ -114,12 +119,11 @@ public:
 		//else if statement that allows the user to withdrawal appropriate funds from an account
 		else if (type == 2)
 		{
-			
 			cout << "How much would you like to withdrawal? $";
 			cin >> amount;
 
 			//a while statement that checks that the user is not withdrawing more than the account has
-			while (amount > acc->getBalance() || (amount + acc->getWithdrawalPenalty()) > acc->getBalance() )
+			while (amount > acc->getBalance() || (amount + acc->getWithdrawalPenalty()) > acc->getBalance())
 			{
 				cout << "Insufficient Funds. Try Again. How much would you like to withdrawal? $";
 				cin >> amount;
@@ -188,10 +192,8 @@ public:
 			cout << "Amount: $" << amount << endl;
 		}
 
-
 		cout << endl;
 	}
-
 	
 };
 
@@ -211,9 +213,7 @@ struct CompareTime
 	//this function would automatically run
 	bool operator()(transaction const& p1, transaction const& p2)
 	{
-		//return true if p1 is ordered
-		//before p2, for example:
-
+		//return true if p1 is ordered before p2
 		return p1.timestamp < p2.timestamp;
 	}
 };

@@ -1,8 +1,8 @@
 /*
 	Programmer: Brian Dean
-	Purpose: Final Project
-	Compiler: MVS C++ 2019
-	Date: 11/29/21
+	Purpose: Banking System
+	Compiler: MS Visual Studio Code
+	Date: 3-31-21
 */
 #include <iostream>
 #include "bank.h"
@@ -15,8 +15,7 @@ int main()
 {
 
 //creating the bank object that runs our banking system menu
-bank samediffbank;
-
+bank FidelityFiduciaryBank;
 
 system("pause");
 return 0;
