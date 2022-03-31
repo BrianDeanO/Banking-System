@@ -3,9 +3,11 @@
 using namespace std;
 #pragma once
 
+//class for the money market account subtype
 class MoneyMarket : public account
 {
 private:
+	//creating the variables and interest rate specific to the money market account type
 	double balance;
 	int months;
 	const double INT_RATE = 0.0125;
@@ -22,7 +24,7 @@ public:
 		setAccountType(3);
 	}
 
-	//second overloaded constructor
+	//overloaded constructor
 	MoneyMarket(int accountid, int customerid, int accounttype, double b, int m) : account(accountid, customerid, accounttype)
 	{
 		this->balance = b;
@@ -30,6 +32,7 @@ public:
 		this->withdrawalPenalty = 0;
 	}
 
+	//function that returns the age of the account 
 	virtual int getMonths() override
 	{
 		return months;
@@ -41,7 +44,7 @@ public:
 		balance = b;
 	}
 
-	//getter function for the balance of the money market account with the parameter equal to the amount of months the user has been with the bank
+	//getter function for the balance of the money market account 
 	virtual double getBalance() override
 	{
 		return balance;
@@ -60,11 +63,13 @@ public:
 	//function that determines the penalty based on the money market account balance
 	virtual double getWithdrawalPenalty() override
 	{
+		//if statement that sets a penalty if the balance is less than $10000
 		if (balance < 10000 && months > 0)
 		{
 			setWithdrawalPenalty(200);
 			return 200;
 		}
+		
 		else
 		{
 			setWithdrawalPenalty(0);

@@ -119,16 +119,21 @@ public:
 	{
 		node<account*>* temp = head;
 
+		//while loop that enables us to print the entire list of accounts
 		while (temp != 0)
 		{
+			//printing the account and customer IDs
 			cout << "Account ID: " << temp->getData()->getAccountID() << endl;
 			cout << "Customer ID: " << temp->getData()->getCustomerID() << endl;
 
 			int type = temp->getData()->getAccountType();
+
+			//using the account functions to calculate the total balance
 			double total = temp->getData()->getInterestEarned() + temp->getData()->getBalance();
 
 			cout << "Account Type: ";
 
+			//switch block that will display the proper account type title
 			switch (type)
 			{
 			case 0: 
@@ -148,8 +153,10 @@ public:
 				break;
 			}
 
+			//formatting and displaying the current account balance
 			cout << "Current Balance: $" << fixed << setprecision(2) << temp->getData()->getBalance() << endl;
 
+			//finding and using the age of the account to calculate and add the interest earned 
 			cout << "Balance With Interest After " << temp->getData()->getMonths() << " months: $";
 			cout << fixed << setprecision(2) << total << endl;
 

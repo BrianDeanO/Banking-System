@@ -3,9 +3,11 @@
 using namespace std;
 #pragma once
 
+//class for the checking account subtype
 class checking : public account
 {
 private:
+	//creating the variables and interest rate specific to the checking account
 	double balance;
 	int months;
 	const double INT_RATE = 0.0002;
@@ -30,6 +32,7 @@ public:
 		this->withdrawalPenalty = 0;
 	}
 
+	//function that returns the number of months the account will be active
 	virtual int getMonths() override
 	{
 		return months;
@@ -41,7 +44,7 @@ public:
 		balance = b;
 	}
 
-	//function that gets the balance calculated with interest over a period defined by the user
+	//function that returns the balance of the account
 	virtual double getBalance() override
 	{
 		return balance;
@@ -57,7 +60,7 @@ public:
 		return interestEarned;
 	}
 
-	//printing function that first uses the base class account to print customer and account id, then displays the checking balance
+	//printing function that first calls upon the base class print function, then displays the checking balance
 	virtual void print()
 	{
 		account::print();
@@ -84,7 +87,7 @@ public:
 		cout << "Checking Account Balance: $" << balance << endl;
 	}
 
-	//this function is necessary since it is overriding the abstract function from the account class, and it returns a value of zero always
+	//this function only returns zero since the checking account does not have a withdrawal penalty
 	virtual double getWithdrawalPenalty() override
 	{
 		return 0;

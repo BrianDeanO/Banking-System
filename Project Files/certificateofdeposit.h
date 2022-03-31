@@ -3,6 +3,7 @@
 using namespace std;
 #pragma once
 
+//class for the certificate of deposit account type
 class CertificateOfDeposit : public account
 {
 private:
@@ -23,7 +24,7 @@ public:
 		setAccountType(2);
 	}
 
-	//second overloaded constructor
+	//overloaded constructor
 	CertificateOfDeposit(int accountid, int customerid, int accounttype, double b, int m) : account(accountid, customerid, accounttype)
 	{
 		this->balance = b;
@@ -32,6 +33,7 @@ public:
 		this->withdrawalPenalty = 0;
 	}
 
+	//function that returns the number of months the account will be active
 	virtual int getMonths() override
 	{
 		return months;
@@ -40,6 +42,7 @@ public:
 	//function that sets the interest rate based on the amount of months the user has been with the bank
 	double getIntRate(int m)
 	{
+		//using a series of else-if statements to determine the interest rate of the account
 		if (m < 3)
 		{
 			return 0.0;
@@ -74,7 +77,7 @@ public:
 		balance = b;
 	}
 
-	//getter function for the balance of the CD account with the parameter equal to the amount of months the user has been with the bank
+	//getter function for the balance of the CD account
 	virtual double getBalance() override
 	{
 		return balance;
@@ -132,7 +135,7 @@ public:
 		withdrawalPenalty = pen;
 	}
 
-	//virtual function that coincides with the account print function
+	//virtual print function for the CD account
 	virtual void print()
 	{
 		account::print();
@@ -146,7 +149,7 @@ public:
 		setBalance(balance);
 	}
 
-	//virtual withdraw function that asks the user for the amount of months which will allow for proper penalties to take effect
+	//virtual withdraw function that calculates the new current balance based on any possibly penalties
 	virtual void withdraw(double money) override
 	{
 		balance = ((balance)-(money + getWithdrawalPenalty()));

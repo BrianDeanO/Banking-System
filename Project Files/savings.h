@@ -3,9 +3,11 @@
 using namespace std;
 #pragma once
 
+//savings account subtype inheriting from the account class
 class savings : public account
 {
 private:
+	//creating the interest rate and variables specific to the savings account
 	const double INT_RATE = .0105;
 	double balance;
 	int months;
@@ -22,7 +24,7 @@ public:
 		setAccountType(0);
 	}
 
-	//second overloaded constructor
+	// overloaded constructor that also calls upon the base account class overloaded constructor
 	savings(int accountid, int customerid, int accounttype, double b, int m) : account(accountid, customerid, accounttype)
 	{
 		this->balance = b;
@@ -30,6 +32,7 @@ public:
 		this->withdrawalPenalty = 0;
 	}
 
+	//overriding the getMonths virtual function to retrieve the age of the account
 	virtual int getMonths() override
 	{
 		return months;
@@ -41,7 +44,7 @@ public:
 		balance = b;
 	}
 
-	//getter function for the balance of the savings account with the parameter equal to the amount of months the user has been with the bank
+	//getter function for the balance of the savings account
 	virtual double getBalance() override
 	{
 		return balance;
@@ -60,13 +63,15 @@ public:
 	//function that determines the penalty based on the savings account balance
 	virtual double getWithdrawalPenalty() override
 	{
-
+	
+	//if statement that sets a penalty if the balance is less than $1000 
 	if (balance < 1000 && months > 0)
 	{
 		setWithdrawalPenalty(50);
 		return 50;
 	}
 
+	//else statement that runs if a penalty is not drawn
 	else
 		setWithdrawalPenalty(0);
 		return 0;
@@ -95,7 +100,6 @@ public:
 	//function that handles the withdrawal from the savings account with the penalty obtained from the get withdrawal penalty function
 	virtual void withdraw(double money) override
 	{
-
 		balance = ((balance)-(money + getWithdrawalPenalty()));
 		setBalance(balance);
 	}
