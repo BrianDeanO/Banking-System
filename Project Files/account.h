@@ -3,15 +3,17 @@
 using namespace std;
 #pragma once
 
+//base account class that will be the super class for our account subtypes
 class account
 {
 private:
 	int accountID;
 	int customerID;
 	int accountType;
-	//in the public location are all the function prototypes for the account class 
+
 public:
 
+	//list of function prototypes for the account class
 	account();
 	account(int accountid, int customerid, int accountType);
 	int getAccountID();
@@ -21,8 +23,8 @@ public:
 	int getAccountType();
 	void setAccountType(int t);
 
-	//starting the virtual functions which allow for proper use with the derived classes
-	//abstract functions are also present and are directly for the special derived classes to make their own
+	//writing the virtual functions and abstract functions 
+	// which are then overriden by the each of the special derived account subtype classes
 	virtual void print();
 	virtual void deposit(double money) = 0;
 	virtual void withdraw(double money) = 0;
@@ -39,10 +41,12 @@ account::account()
 {
 	accountID = 0;
 	customerID = 0;
+
+	//setting the accountType to a default value of -1 as to not correspond to a derived class type
 	accountType = -1;
 }
 
-//overloaded constructor that takes in the account id and the customer id from the customer
+//overloaded constructor that takes in the account id, customer id and account type from the customer
 account::account(int accountid, int customerid, int accountType)
 {
 	this->accountID = accountid;
@@ -50,13 +54,13 @@ account::account(int accountid, int customerid, int accountType)
 	this->accountType = accountType;
 }
 
-//get account id function
+//get account id function 
 int account::getAccountID()
 {
 	return accountID;
 }
 
-//set the account id function making sure it is a proper number
+//set the account id function making sure it is an appropriate number
 void account::setAccountID(int id)
 {
 	if (id < 0)
@@ -64,13 +68,13 @@ void account::setAccountID(int id)
 	accountID = id;
 }
 
-//function for getting the customer ID member
+//function for getting the customer ID number
 int account::getCustomerID()
 {
 	return customerID;
 }
 
-//setting the customer ID member
+//setting the customer ID number
 void account::setCustomerID(int c)
 {
 	if (c < 0)
@@ -78,7 +82,7 @@ void account::setCustomerID(int c)
 	customerID = c;
 }
 
-//function for getting the accounttype number
+//function for getting the account type number
 int account::getAccountType()
 {
 	return accountType;

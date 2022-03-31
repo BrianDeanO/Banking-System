@@ -19,6 +19,8 @@ class AccountList : public LinkedList<account*>
 {
 private:
 	string filename;
+
+	//creating a vector that will hold the account types of each account created
 	vector <int> accountTypes;
 
 public:
@@ -160,26 +162,36 @@ public:
 	//function that reads in our list of accounts from a binary file and stores them in a linked list
 	void readFile()
 	{
+		//creating our temporary local variables
 		int count = 0;
 		int itemp = 0;
 		account* acct = nullptr;
 
+		//creating and opening our binary file
 		ifstream in(this->filename, ios::binary);
+
+		//reading in the count integer 
 		in.read((char*)&count, sizeof(int));
 
+		//next, we use the count integer and a for loop to read the account types from the file
 		for (int i = 0; i < count; i++)
 		{
 			in.read((char*)&itemp, sizeof(int));
+
+			//adding the account types to our vector 
 			accountTypes.push_back(itemp);
 		}
 
 		node<account*>* temp = head;
 
+		//a for loop that uses the count variable to read the saved accounts from file
 		for (int i = 0; i < count; i++)
 		{
+			//using a switch block and the account types vector to ensure proper reading of each account
 			switch (accountTypes[i])//0 - Savings, 1 - Checking, 2 - CD, 3 - MoneyMarket
 			{
-
+			//to properly read in account objects, for each type, we create a temporary object, use it to read
+			// in the saved account from file, then we create a new account pointer with the same data
 			case 0:
 			{
 				savings save;
@@ -226,10 +238,17 @@ public:
 	//function that allows us to save our list of accounts to a binary file
 	void writeFile()
 	{
+		//creating and opening our binary file
 		ofstream out(this->filename, ios::binary);
-		int count = this->count;
-		out.write((char*)&count, sizeof(int));//file header amount of accounts in file
 
+		//getting the size of our account list
+		int count = this->count;
+
+		//writing the count to file
+		out.write((char*)&count, sizeof(int));
+
+		//for loop that writes each account type number from our vector of account types
+		// that correspond to the accounts saved in our linked list of accounts
 		for (int i = 0; i < count; i++)
 		{
 			out.write((char*)&accountTypes[i], sizeof(int));
@@ -243,20 +262,25 @@ public:
 		{
 			acct = temp->getData();
 
+			//switch block that writes the correct size of account to file according to the current account type
 			switch (accountTypes[i])// 0 - Savings, 1 - Checking, 2 - CD, 3 - MoneyMarket
 			{
+			//first case that writes a savings account to file
 			case 0:
 				out.write((char*)acct, sizeof(savings));
 				break;
 
+			//next case writes a checking account
 			case 1:
 				out.write((char*)acct, sizeof(checking));
 				break;
 
+			//this statement writes a certificate of deposit account to file
 			case 2:
 				out.write((char*)acct, sizeof(CertificateOfDeposit));
 				break;
 
+			//the last case then writes a money market account to file
 			case 3:
 				out.write((char*)acct, sizeof(MoneyMarket));
 				break;
@@ -265,6 +289,7 @@ public:
 			temp = temp->getNext();
 		}
 
+		//closing the file
 		out.close();
 	}
 
@@ -276,15 +301,18 @@ public:
 		node<account*>* temp = head;
 		int count = 0;
 
+		//while loop that traverses through the list to find an account with a matching ID number
 		while (temp != nullptr)
 		{
 			acct = temp->getData();
 
+			//if statement that returns the account if the ID numbers match
 			if (ID == temp->getData()->getAccountID())
 			{
 				return acct;
 			}
 
+			//else statement that moves to the next account into the list
 			else
 			{
 				temp = temp->getNext();
@@ -292,6 +320,7 @@ public:
 			}
 		}
 
+		//returning the nullptr if the account ID was not found within our list
 		return nullptr;
 	}
 

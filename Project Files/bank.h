@@ -84,6 +84,7 @@ public:
 	//function that allows us to add a customer to our linked list
 	void createCustomer()
 	{
+		//creating the temporary variables for the creation of our new customer object
 		customer temp;
 		int ID;
 		string firstName, lastName;
@@ -118,9 +119,11 @@ public:
 	//funcion that creates an account
 	void createAccount()
 	{
+		//creating the variables needed to create a new account 
 		int type, accID, custID, months;
 		double balance;
 
+		//reading the acccounts file if the list is empty
 		if (accounts.getCount() == 0)
 		{
 			accounts.readFile();
@@ -151,7 +154,7 @@ public:
 		//creating and adding the accounts to our linked list depending on the account type chosen by the user
 		switch (type)
 		{
-
+		//case that creates a savings account
 		case 0:
 		{
 			account* temp = new savings(accID, custID, type, balance, months);
@@ -159,6 +162,7 @@ public:
 		}
 			break;
 
+		//creating a checking account	
 		case 1:
 		{
 			account* temp = new checking(accID, custID, type, balance, months);
@@ -166,6 +170,7 @@ public:
 		}
 			break;
 
+		//case that creates a certificate of deposit account
 		case 2:
 		{
 			account* temp = new CertificateOfDeposit(accID, custID, type, balance, months);
@@ -173,6 +178,7 @@ public:
 		}
 			break;
 
+		//final case that will create a money market account
 		case 3:
 		{
 			account* temp = new MoneyMarket(accID, custID, type, balance, months);
@@ -182,7 +188,7 @@ public:
 
 		}
 
-		//sorting the accounts then writing to file
+		//sorting the accounts list, then writing to file
 		accounts.sort();
 		accounts.writeFile();
 	}

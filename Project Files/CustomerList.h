@@ -14,11 +14,16 @@ public:
 	//function for writing our linked list full of customers to our binary file
 	void writeFile(string filename)
 	{
+		//getting the size of our customer list
 		int count = this->getCount();
+
+		//opening and creating our binary file
 		ofstream ofs(filename, ios::binary);
 
+		//first writing the count variable to our file
 		ofs.write((char*)(&count), sizeof(int));
 
+		//creating our temporary variables for traversal and writing
 		node<customer>* temp = head;
 		customer ctemp;
 
@@ -30,17 +35,21 @@ public:
 			temp = temp->getNext();
 		}
 
+		//closing the file
 		ofs.close();
 	}
 
 	//function that reads our binary file and fills our linked list with customers
 	void readFile(string filename)
 	{
+		//creating our temporary customer object and count variable
 		customer temp;
 		int count = 0;
-		//creating an opening our input binary file
+
+		//creating and opening our input binary file
 		ifstream ifs(filename, ios::binary);
 
+		//reading the count variable from file
 		ifs.read((char*)(&count), sizeof(int));
 
 		//reading each customer object from the file and adding it to our linked list
@@ -50,6 +59,7 @@ public:
 			this->addRear(temp);
 		}
 
+		//closing the file
 		ifs.close();
 	}
 
